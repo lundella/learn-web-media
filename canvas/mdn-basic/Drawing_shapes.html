@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      window.onload = function() {
+        function draw() {
+          const canvas = document.getElementById('shapes');
+          if(canvas.getContext) {
+            const ctx = canvas.getContext('2d');
+
+            ctx.fillRect(25, 25, 100, 100);
+            ctx.clearRect(45, 45, 60, 60);
+            ctx.strokeRect(50, 50, 50, 50);
+          }
+        }
+        draw();
+
+        function drawPath() {
+          const canvas = document.getElementById('drawPath');
+          if(canvas.getContext) {
+            const ctx = canvas.getContext('2d');
+
+            ctx.beginPath();
+            ctx.moveTo(75, 50);
+            ctx.lineTo(100, 75);
+            ctx.lineTo(100, 25);
+            ctx.fill();
+          }
+        }
+        drawPath();
+
+        function movePen() {
+          const canvas = document.getElementById('movePen');
+
+          if(canvas.getContext) {
+            const ctx = canvas.getContext('2d');
+
+            ctx.beginPath();
+            console.log( Math.PI);
+            ctx.arc(75, 75, 50, 0, Math.PI*2, true);
+            ctx.moveTo(110, 75);
+
+            ctx.arc(75, 75, 35, 0, Math.PI, false);
+            ctx.moveTo(65, 65);
+
+            ctx.arc(60, 65, 5, 0, Math.PI * 2, true);
+            ctx.moveTo(95, 65);
+
+            ctx.arc(90, 65, 5, 0, Math.PI *2, true);
+            ctx.stroke();
+          }
+        }
+        movePen();
+      }
+
+    </script>
+    <style>
+      canvas { border: 1px solid black };
+    </style>
+  </head>
+  <body>
+    <canvas id="shapes" width="150" height="150">
+      This is for the drawing shapes example.
+    </canvas>
+    <canvas id="drawPath" width="150" height="150">
+      This is for the drawing shapes example.
+    </canvas>
+    <canvas id="movePen" width="150" height="150">
+
+    </canvas>
+  </body>
+</html>
