@@ -22,7 +22,7 @@
 
             ctx.beginPath();
             ctx.moveTo(75, 50);
-            ctx.lineTo(100, 75);
+            ctx.lineTo(100, 85);
             ctx.lineTo(100, 25);
             ctx.fill();
           }
@@ -51,8 +51,81 @@
           }
         }
         movePen();
-      }
 
+        function drawLine() {
+          const canvas = document.getElementById('drawLine');
+
+          if(canvas.getContext) {
+            const ctx = canvas.getContext('2d');
+
+            ctx.beginPath();
+            ctx.moveTo(25, 25);
+            ctx.lineTo(105, 25);
+            ctx.lineTo(25, 105);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(125, 125);
+            ctx.lineTo(125, 45);
+            ctx.lineTo(45, 125);
+            ctx.closePath();
+            ctx.stroke();
+
+          }
+        }
+        drawLine();
+
+        function drawArc() {
+          const canvas = document.getElementById('drawArc');
+          console.log("aaaabbbb");
+          if(canvas.getContext) {
+            const ctx = canvas.getContext('2d');
+            for(let i = 0; i < 4; i++) {
+              for(let j = 0; j < 3; j++) {
+                ctx.beginPath();
+                const x = 25 + j * 50;
+                const y = 25 + i * 50;
+                const radius = 20;
+                const startAngle = 0;
+                const endAngle = Math.PI + (Math.PI * j) /2;
+                const anticlockwise = i % 2 == 0 ? false : true;
+
+                ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+
+                if(i > 1) {
+                  ctx.fill();
+                } else {
+                  ctx.stroke();
+                }
+                console.log(`${x} ${y} ${radius} ${startAngle} ${endAngle} ${anticlockwise}`)
+              }
+            }
+          }
+        }
+
+        drawArc();
+
+        function quadraticCurve() {
+          const canvas = document.getElementById('quadratic');
+          if(canvas.getContext) {
+            const ctx = canvas.getContext('2d');
+
+            ctx.beginPath();
+            ctx.moveTo(75, 25);
+
+            ctx.quadraticCurveTo(25, 25, 25, 62.5);
+            ctx.quadraticCurveTo(25, 100, 50, 100);
+            // ctx.quadraticCurveTo(50, 120, 30, 125);
+            // ctx.quadraticCurveTo(60, 120, 65, 100);
+            // ctx.quadraticCurveTo(125, 100, 125, 62.5);
+            // ctx.quadraticCurveTo(125, 25, 75, 25);
+
+            ctx.stroke();
+          }
+        }
+
+        quadraticCurve();
+      }
     </script>
     <style>
       canvas { border: 1px solid black };
@@ -66,7 +139,10 @@
       This is for the drawing shapes example.
     </canvas>
     <canvas id="movePen" width="150" height="150">
-
     </canvas>
+    <canvas id="drawLine" width="150" height="150">
+    </canvas>
+    <canvas id="drawArc" width="150" height="150"></canvas>
+    <canvas id="quadratic" width="150" height="150"></canvas>
   </body>
 </html>
